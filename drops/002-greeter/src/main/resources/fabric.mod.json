@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "m101_greeter",
+  "version": "${version}",
+  "name": "Modding 101 Lab 002: Greeter",
+  "description": "Greets every player who joins, by name.",
+  "authors": ["The Block Academy"],
+  "contact": { "homepage": "https://theblock.academy" },
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["dev.blockacademy.lab.greeter.GreeterMod"]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}

@@ -13,4 +13,8 @@ what the mod is called, what it needs, and which class to call (its *entrypoint*
 
 **Change it (homework).** Log a second line with the Minecraft version you're running.
 
-_The solution opens the next Lab._
+**Solution** (opens Lab 002):
+
+```java
+LOGGER.info("Running on Minecraft {}", SharedConstants.getCurrentVersion().getName());
+```
