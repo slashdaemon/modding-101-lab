@@ -15,4 +15,12 @@ with your name in green.
 
 **Change it.** Greet players differently the very first time they join a world.
 
-_The solution opens the next Lab._
+**Solution** (opens Lab 003). In the JOIN listener, in place of the `sendSystemMessage` line, with
+`import net.minecraft.stats.Stats;`. A player who has never left this world has a "Games Quit" count of 0:
+
+```java
+boolean firstTime = player.getStats().getValue(Stats.CUSTOM.get(Stats.LEAVE_GAME)) == 0;
+player.sendSystemMessage(firstTime
+        ? Component.literal("First time here? Welcome!")
+        : greeting(player.getName().getString()));
+```

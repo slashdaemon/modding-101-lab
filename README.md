@@ -18,6 +18,7 @@ a Mac. You don't need to install Java yourself.
 | [Lab 000 · Setup](setup/LAB-000.md) | Install IntelliJ IDEA and open a Lab |
 | [Lab 001 · Hello](drops/001-hello) | Entrypoint and fabric.mod.json |
 | [Lab 002 · Greeter](drops/002-greeter) | Server events (player join) |
+| [Lab 003 · Client and server](drops/003-sides) | Client and server sides; main, client and server entrypoints; split source sets |
 
 ## Using a Lab
 

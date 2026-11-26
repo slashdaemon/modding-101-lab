@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "m101_sides",
+  "version": "${version}",
+  "name": "Modding 101 Lab 003: Client and server",
+  "description": "Three entrypoints, one log: see which code runs where.",
+  "authors": ["The Block Academy"],
+  "contact": { "homepage": "https://theblock.academy" },
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["dev.blockacademy.lab.sides.SidesMod"],
+    "client": ["dev.blockacademy.lab.sides.client.SidesClient"],
+    "server": ["dev.blockacademy.lab.sides.SidesServer"]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
