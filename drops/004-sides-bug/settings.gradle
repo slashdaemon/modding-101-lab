@@ -1,0 +1,14 @@
+// Modding 101 Lab: every drop uses this exact settings file.
+pluginManagement {
+    repositories {
+        maven { name = "Fabric"; url = "https://maven.fabricmc.net/" }
+        gradlePluginPortal()
+    }
+}
+
+plugins {
+    // Lets Gradle download Java 21 for itself when the computer doesn't have it.
+    id "org.gradle.toolchains.foojay-resolver-convention" version "1.0.0"
+}
+
+rootProject.name = providers.gradleProperty("archives_name").get()

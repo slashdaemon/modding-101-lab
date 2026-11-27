@@ -1,0 +1,96 @@
+// Modding 101 Lab: every drop uses this exact build file.
+// What makes each drop different lives in its gradle.properties (mod id, name, file name).
+
+plugins {
+    // Loom is Fabric's Gradle plugin: it downloads Minecraft, applies the names, and builds the mod jar.
+    id "fabric-loom" version "1.13.6"
+}
+
+version = "${project.minecraft_version}-fabric"
+group = "dev.blockacademy.lab"
+
+base {
+    archivesName = project.archives_name
+}
+
+repositories {
+    // Parchment adds parameter names and documentation on top of Mojang's official names.
+    maven { name = "ParchmentMC"; url = "https://maven.parchmentmc.org" }
+}
+
+// Lab 003: client-only code lives in its own folder (src/client), so common code can't use it by accident.
+def splitSources = (project.findProperty("split_sources") ?: "true").toBoolean()
+// Lab 074: drops with in-game tests keep them in src/gametest; they never ship in the jar.
+def hasGametests = file("src/gametest").exists()
+
+loom {
+    if (splitSources) {
+        splitEnvironmentSourceSets()
+    }
+    mods {
+        register(project.mod_id) {
+            sourceSet sourceSets.main
+            if (splitSources) {
+                sourceSet sourceSets.client
+            }
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings loom.layered {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-${project.minecraft_version}:${project.parchment_version}@zip")
+    }
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+}
+
+if (hasGametests) {
+    sourceSets {
+        gametest {
+            compileClasspath += sourceSets.main.compileClasspath + sourceSets.main.output
+            runtimeClasspath += sourceSets.main.runtimeClasspath + sourceSets.main.output
+        }
+    }
+    loom {
+        mods {
+            register("${project.mod_id}_gametest") {
+                sourceSet sourceSets.gametest
+            }
+        }
+        runs {
+            gametest {
+                server()
+                name = "Game Test"
+                vmArg "-Dfabric-api.gametest"
+                vmArg "-Dfabric-api.gametest.report-file=${project.layout.buildDirectory.file('gametest/junit.xml').get().asFile}"
+                runDir "build/gametest"
+                source sourceSets.gametest
+            }
+        }
+    }
+}
+
+processResources {
+    def props = [
+            version          : project.mod_version,
+            minecraft_version: project.minecraft_version,
+            loader_version   : project.loader_version,
+    ]
+    inputs.properties props
+    filesMatching("fabric.mod.json") {
+        expand props
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+    it.options.encoding = "UTF-8"
+}

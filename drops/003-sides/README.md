@@ -22,4 +22,10 @@ On a dedicated server the log shows `[main]`, `[server]` and `Kind: dedicated se
 **Change it.** Make the client log the player's name once they join a world.
 (Hint: `ClientPlayConnectionEvents.JOIN`, in `src/client`.)
 
-_The solution opens the next Lab._
+**Solution** (opens Lab 004). In `SidesClient.onInitializeClient`, with
+`import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;`:
+
+```java
+ClientPlayConnectionEvents.JOIN.register((handler, sender, client) ->
+        SidesMod.LOGGER.info("[client] Joined as {}", client.getUser().getName()));
+```
