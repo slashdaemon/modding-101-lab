@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "m101_hello_command",
+  "version": "${version}",
+  "name": "Modding 101 Lab 005: Commands",
+  "description": "/m101 hello [name] for everyone, /m101 announce <message> for operators.",
+  "authors": ["The Block Academy"],
+  "contact": { "homepage": "https://theblock.academy" },
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["dev.blockacademy.lab.hellocommand.HelloCommandMod"]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}

@@ -20,6 +20,7 @@ a Mac. You don't need to install Java yourself.
 | [Lab 002 · Greeter](drops/002-greeter) | Server events (player join) |
 | [Lab 003 · Client and server](drops/003-sides) | Client and server sides; main, client and server entrypoints; split source sets |
 | [Lab 004 · Bug hunt: the side that crashed](drops/004-sides-bug) | Bug hunt: works in singleplayer, crashes the dedicated server |
+| [Lab 005 · Commands](drops/005-hello-command) | Brigadier commands: literals, arguments, permissions |
 
 ## Using a Lab
 

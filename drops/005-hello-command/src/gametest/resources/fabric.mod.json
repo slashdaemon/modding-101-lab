@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "id": "m101_hello_command_gametest",
+  "version": "1.0.0",
+  "name": "Lab 005 tests",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-gametest": ["dev.blockacademy.lab.hellocommand.test.HelloCommandTests"]
+  }
+}
